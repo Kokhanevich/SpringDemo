@@ -5,11 +5,7 @@ import com.example.demo.model.User;
 import com.example.demo.service.RoleService;
 import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +22,7 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
+//    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/all")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
@@ -37,5 +34,11 @@ public class UserController {
                 .orElseThrow(() -> new NoSuchElementException("Can’t find this role"));
         user.setRoles(Arrays.asList(role));
         userService.save(user);
+    }
+
+//    @CrossOrigin(origins = "http://localhost:8080")
+    @DeleteMapping("/{userId}")
+    public void delete(@PathVariable("userId") Long id) {
+        userService.delete(id);
     }
 }

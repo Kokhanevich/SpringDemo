@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    {{ message }}
+</div>
+
+<div id="app-3">
+    <span v-if="seen">Сейчас меня видно</span>
+</div>
+
+<div id="app-4">
+    <ol>
+        <li v-for="todo in todos">
+            {{ todo.text }}
+        </li>
+    </ol>
+</div>
+
+<div id="app-5">
+    <p>{{ message }}</p>
+    <button @click="reverseMessage">Перевернуть сообщение</button>
+</div>
+
+<div id="app-7">
+            <table border="1">
+                <thead>
+                 <th>ID</th>
+                 <th>Name</th>
+                </thead>
+                <tbody>
+                  <tr v-for="item in groceryList">
+                      <td>{{item.id}}</td>
+                      <td>{{item.text}}</td>
+                  </tr>
+                </tbody>
+            </table>
+</div>
+
+<div id="vue">
+
+    <h3>{{ textSearch }} (length: {{textSearch.length}})</h3>
+    <input type="text" size="50" v-model="textSearch">
+<!--    <button type="button" @click="getHashtags">Load</button>-->
+    <button type="button" @click="getCities">Load</button>
+
+    <ul>
+        <li v-for="hashtag in hashtags">{{ hashtag }}</li>
+    </ul>
+
+    <ul>
+        <li v-for="city in cities">{{ city.region }}: {{ city.city }}</li>
+    </ul>
+
+</div>
+
+<script type="text/babel">
+
+    var  vue = new Vue({
+        el: '#vue',
+        data: {
+            hashtags: [],
+            cities: [],
+            textSearch: '',
+            url: {
+                hashtags: 'https://dka-develop.ru/api?type=hashtag',
+                cities: 'https://dka-develop.ru/api?type=city',
+            }
+        },
+        watch: {
+            textSearch: function () {
+                if (this.textSearch.length > 3){
+                    this.textSearch = 'Bla bla';
+                }
+            }
+        },
+        created: function() {
+            console.log(this.url.hashtags);
+        },
+        methods: {
+            getHashtags(){
+                axios.get(this.url.hashtags).then((response) => {
+                    console.log(response.data);
+                    this.hashtags = response.data;
+                });
+            },
+
+            getCities(){
+                axios.get(this.url.cities).then((response) => {
+                    console.log(response.data);
+                    this.cities = response.data;
+                });
+            }
+        }
+    })
+var app = new Vue({
+el: '#app',
+data: {
+message: 'Привет, Vue!'
+}
+})
+
+var app3 = new Vue({
+    el: '#app-3',
+    data: {
+        seen: true
+    }
+})
+
+var app4 = new Vue({
+    el: '#app-4',
+    data: {
+        todos: [
+            { text: 'Изучить JavaScript' },
+            { text: 'Изучить Vue' },
+            { text: 'Создать что-нибудь классное' }
+        ]
+    }
+})
+
+var app5 = new Vue({
+    el: '#app-5',
+    data: {
+        message: 'Привет, Vue.js!'
+    },
+    methods: {
+        reverseMessage: function () {
+            this.message = this.message.split('').reverse().join('')
+        }
+    }
+})
+
+Vue.component('todo-item', {
+    props: ['todo'],
+    template: '<li>{{ todo.text }}</li>'
+})
+
+var app7 = new Vue({
+    el: '#app-7',
+    data: {
+        groceryList: [
+            { id: 0, text: 'Овощи' },
+            { id: 1, text: 'Сыр' },
+            { id: 2, text: 'Что там ещё люди едят?' }
+        ]
+    }
+})
+</script>
+
+
+
+</body>
+</html>

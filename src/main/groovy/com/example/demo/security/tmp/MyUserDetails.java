@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package com.example.demo.security.tmp;
 
 import com.example.demo.model.Role;
 import com.example.demo.model.User;
@@ -20,16 +20,21 @@ public class MyUserDetails implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findUserByLogin(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User with name "
-                        + username + "not found"));
-
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        for (Role role : user.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-        }
-
-        return new org.springframework.security.core.userdetails.User(user.getLogin(),
-                user.getPassword(), grantedAuthorities);
+        return null;
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        User user = userRepository.findUserByLogin(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("User with name "
+//                        + username + "not found"));
+//
+//        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+//        for (Role role : user.getRoles()) {
+//            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+//        }
+//
+//        return new org.springframework.security.core.userdetails.User(user.getLogin(),
+//                user.getPassword(), grantedAuthorities);
+//    }
 }

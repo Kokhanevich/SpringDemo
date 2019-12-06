@@ -39,6 +39,11 @@ public class User {
 
     }
 
+    public User(@NotNull String login, @NotNull String password) {
+        this.login = login;
+        this.password = password;
+    }
+
     public User(@NotNull String login, @NotNull String password, @NotNull String name) {
         this.login = login;
         this.password = password;
