@@ -3,7 +3,7 @@ import axios from 'axios'
     if (limit === undefined) {
         limit = 25
     }
-    return axios.get(`http://localhost:8081/user/all?limit=${limit}`).then((response) => {
+    return axios.get(`/api/user/all?limit=${limit}`).then((response) => {
         console.log(response.data);
         return response;
     })

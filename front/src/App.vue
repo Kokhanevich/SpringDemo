@@ -65,6 +65,9 @@
         <li class="nav-item" v-if="showAdminBoard">
           <a href="/admin" class="nav-link">Admin Board</a>
         </li>
+        <li class="nav-item">
+          <a href="/allUsers" class="nav-link" v-if="currentUser">All Users</a>
+        </li>
       </div>
 
       <div class="navbar-nav ml-auto" v-if="!currentUser">
@@ -121,5 +124,5 @@
         this.$router.push('/login');
       }
     }
-  };
+  }
 </script>

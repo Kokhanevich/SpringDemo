@@ -45,9 +45,8 @@
         },
         methods: {
             removeUser: function (id) {
-                // debugger;
 
-                axios.delete(`http://localhost:8081/user/${id}`).then(response => {
+                axios.delete(`/api/user/${id}`).then(response => {
                     console.log(response.data);
                 })
             }

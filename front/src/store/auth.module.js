@@ -10,7 +10,6 @@ export const auth = {
     state: initialState,
     actions: {
         login({ commit }, user) {
-            debugger;
             return AuthService.login(user).then(
                 user => {
                     commit('loginSuccess', user);

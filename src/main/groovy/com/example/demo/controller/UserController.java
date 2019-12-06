@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserController {
     public static final String ROLE_NAME = "USER";
 
@@ -22,7 +22,6 @@ public class UserController {
     @Autowired
     private RoleService roleService;
 
-//    @CrossOrigin(origins = "http://localhost:8080")
     @GetMapping("/all")
     public List<User> getAllUsers() {
         return userService.getAllUsers();
@@ -36,7 +35,6 @@ public class UserController {
         userService.save(user);
     }
 
-//    @CrossOrigin(origins = "http://localhost:8080")
     @DeleteMapping("/{userId}")
     public void delete(@PathVariable("userId") Long id) {
         userService.delete(id);
